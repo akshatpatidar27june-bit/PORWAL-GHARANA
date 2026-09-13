@@ -1,62 +1,37 @@
-const categories = [
-  { name: "New Arrivals", count: "24 pieces" },
-  { name: "Signature Edit", count: "18 pieces" },
-  { name: "Everyday Classics", count: "31 pieces" },
-  { name: "Festive Collection", count: "16 pieces" },
+"use client";
+import { useMemo, useState } from "react";
+
+type Product={code:string;name:string;category:string;price:number;mrp:number;color:string;rating:number;reviews:number;badge?:string};
+const products:Product[]=[
+{code:"PWL-1001",name:"Kashvi Silk Saree",category:"Silk Sarees",price:2499,mrp:3999,color:"Wine",rating:4.6,reviews:128,badge:"Bestseller"},
+{code:"PWL-1002",name:"Banarasi Weave Saree",category:"Banarasi",price:3199,mrp:4999,color:"Maroon",rating:4.7,reviews:94,badge:"Popular"},
+{code:"PWL-1003",name:"Festive Zari Saree",category:"Festive",price:2899,mrp:4599,color:"Green",rating:4.5,reviews:76},
+{code:"PWL-1004",name:"Soft Linen Saree",category:"Daily Wear",price:1499,mrp:2199,color:"Beige",rating:4.4,reviews:61},
+{code:"PWL-1005",name:"Designer Embroidery Saree",category:"Designer",price:3799,mrp:5999,color:"Navy",rating:4.8,reviews:113,badge:"Top Rated"},
+{code:"PWL-1006",name:"Classic Printed Saree",category:"Daily Wear",price:1199,mrp:1799,color:"Pink",rating:4.3,reviews:48},
+{code:"PWL-1007",name:"Riwaayat Kanjivaram",category:"Silk Sarees",price:4299,mrp:6999,color:"Purple",rating:4.9,reviews:82},
+{code:"PWL-1008",name:"Lightweight Party Saree",category:"Party Wear",price:2299,mrp:3499,color:"Black",rating:4.5,reviews:67}
 ];
-
-const products = [
-  { code: "PWL-1001", name: "Heritage Edit", price: "₹2,499", tag: "NEW" },
-  { code: "PWL-1002", name: "Gharana Classic", price: "₹1,899", tag: "BESTSELLER" },
-  { code: "PWL-1003", name: "Festive Signature", price: "₹3,299", tag: "LIMITED" },
-];
-
-export default function Home() {
-  return (
-    <main className="min-h-screen bg-[#f5f0e8]">
-      <div className="border-b border-black/10 bg-[#1d1916] px-5 py-2 text-center text-[11px] font-medium tracking-[0.18em] text-[#f5f0e8]">
-        PORWAL GHARANA · ONLINE STORE · FREE SHIPPING OFFERS COMING SOON
-      </div>
-
-      <header className="sticky top-0 z-20 border-b border-black/10 bg-[#f5f0e8]/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
-          <button className="text-xs uppercase tracking-[0.22em]">Menu</button>
-          <div className="text-center">
-            <div className="font-serif text-2xl tracking-[0.08em]">PORWAL</div>
-            <div className="text-[9px] tracking-[0.48em] text-[#776e64]">GHARANA</div>
-          </div>
-          <div className="flex items-center gap-4 text-xs uppercase tracking-[0.14em]"><button>Search</button><button>Bag (0)</button></div>
-        </div>
-      </header>
-
-      <section className="relative overflow-hidden bg-[#d8c4a4]">
-        <div className="mx-auto grid min-h-[620px] max-w-7xl items-end px-5 py-12 lg:grid-cols-[1.1fr_.9fr] lg:px-8 lg:py-20">
-          <div className="max-w-2xl pb-8">
-            <p className="mb-6 text-xs uppercase tracking-[0.35em] text-black/60">The first Porwal edit</p>
-            <h1 className="font-serif text-6xl leading-[.92] tracking-[-0.04em] md:text-8xl">Made to be<br/><em>remembered.</em></h1>
-            <p className="mt-8 max-w-md text-sm leading-6 text-black/65">A new online destination for considered pieces, everyday favourites and festive selections from Porwal Gharana.</p>
-            <button className="mt-8 border border-[#1d1916] bg-[#1d1916] px-7 py-4 text-xs uppercase tracking-[0.18em] text-[#f5f0e8] transition hover:bg-transparent hover:text-[#1d1916]">Shop collection →</button>
-          </div>
-          <div className="hidden h-[460px] items-center justify-center lg:flex">
-            <div className="h-[390px] w-[300px] rotate-[-5deg] rounded-[150px_150px_24px_24px] border border-black/20 bg-[#efe4d0] shadow-2xl" />
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
-        <div className="mb-8 flex items-end justify-between"><div><p className="text-xs uppercase tracking-[0.25em] text-[#776e64]">Explore</p><h2 className="mt-2 font-serif text-4xl">Shop by edit</h2></div><span className="text-xs text-[#776e64]">{categories.length} collections</span></div>
-        <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10 md:grid-cols-4">
-          {categories.map((item, i) => <div key={item.name} className="group bg-[#fbf8f3] p-7 transition hover:bg-[#1d1916] hover:text-[#f5f0e8]"><div className="mb-20 text-xs text-[#776e64] group-hover:text-[#bda77f]">0{i + 1}</div><h3 className="font-serif text-2xl">{item.name}</h3><p className="mt-2 text-xs opacity-60">{item.count}</p><div className="mt-8 text-xs uppercase tracking-[0.18em] opacity-0 transition group-hover:opacity-100">View edit →</div></div>)}
-        </div>
-      </section>
-
-      <section className="bg-[#1d1916] px-5 py-20 text-[#f5f0e8] lg:px-8">
-        <div className="mx-auto max-w-7xl"><div className="mb-10 flex items-end justify-between"><div><p className="text-xs uppercase tracking-[0.25em] text-[#bda77f]">Curated now</p><h2 className="mt-2 font-serif text-4xl">The latest pieces</h2></div><button className="text-xs uppercase tracking-[0.18em]">View all →</button></div>
-          <div className="grid gap-5 md:grid-cols-3">{products.map((p, i) => <article key={p.code}><div className="relative mb-4 aspect-[4/5] overflow-hidden bg-[#332e28]"><div className="absolute inset-[10%] rotate-2 border border-white/10 bg-[#cbb796]"/><span className="absolute left-4 top-4 text-[9px] tracking-[0.2em] text-black/60">{p.tag}</span><span className="absolute bottom-4 right-4 font-mono text-[9px] text-white/60">{p.code}</span></div><div className="flex justify-between text-sm"><div><h3 className="font-serif text-lg">{p.name}</h3><p className="mt-1 text-xs text-white/50">Available in multiple variants</p></div><span>{p.price}</span></div></article>)}</div>
-        </div>
-      </section>
-
-      <footer className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-10 text-xs text-[#776e64] md:flex-row md:items-center md:justify-between lg:px-8"><div><span className="font-serif text-lg text-[#1d1916]">PORWAL GHARANA</span><p className="mt-1">Commerce foundation · v0.1</p></div><div className="flex gap-6"><span>Instagram</span><span>Contact</span><span>Policies</span></div></footer>
-    </main>
-  );
+const cats=["All","Silk Sarees","Banarasi","Designer","Festive","Daily Wear","Party Wear"];
+const money=(n:number)=>`₹${n.toLocaleString("en-IN")}`;
+export default function Home(){
+ const [q,setQ]=useState(""),[cat,setCat]=useState("All"),[sort,setSort]=useState("featured"),[cart,setCart]=useState<Product[]>([]),[view,setView]=useState<Product|null>(null),[cartOpen,setCartOpen]=useState(false);
+ const list=useMemo(()=>{let x=products.filter(p=>(cat==="All"||p.category===cat)&&`${p.name} ${p.category} ${p.code} ${p.color}`.toLowerCase().includes(q.toLowerCase()));if(sort==="low")x.sort((a,b)=>a.price-b.price);if(sort==="high")x.sort((a,b)=>b.price-a.price);if(sort==="rating")x.sort((a,b)=>b.rating-a.rating);return x},[q,cat,sort]);
+ const add=(p:Product)=>{setCart(c=>[...c,p]);setView(null);setCartOpen(true)};
+ const subtotal=cart.reduce((s,p)=>s+p.price,0),delivery=cart.length?(cart.length>=3?0:99):0;
+ return <main>
+  <div className="top-strip">Welcome to Porwal Gharana <span>•</span> Secure payments <span>•</span> Delivery across India</div>
+  <header className="site-header"><div className="header-main">
+   <button className="brand" onClick={()=>{setCat("All");setQ("")}}><strong>PORWAL GHARANA</strong><small>ONLINE STORE</small></button>
+   <div className="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 5 5"/></svg><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search for sarees, collections and more"/><button onClick={()=>setQ("")}>⌕</button></div>
+   <div className="header-actions"><button><span className="head-icon">♙</span><span>Account</span></button><button><span className="head-icon">▣</span><span>Orders</span></button><button onClick={()=>setCartOpen(true)} className="cart-btn"><span className="head-icon">🛒</span><span>Cart</span>{cart.length>0&&<b>{cart.length}</b>}</button></div>
+  </div><nav className="category-nav"><button className="all-categories">☰ <span>All Categories</span></button>{cats.slice(1).map(c=><button key={c} className={cat===c?"active":""} onClick={()=>setCat(c)}>{c}</button>)}<button onClick={()=>setSort("rating")}>Best Sellers</button><button>New Arrivals</button></nav></header>
+  <section className="hero"><div className="hero-copy"><span className="eyebrow">PORWAL GHARANA SAREES</span><h1>Beautiful sarees.<br/><span>Simple shopping.</span></h1><p>Silk, Banarasi, festive, designer and everyday sarees for every occasion.</p><button className="primary-btn" onClick={()=>document.getElementById("products")?.scrollIntoView({behavior:"smooth"})}>Shop all sarees <b>→</b></button><div className="trust-row"><span>✓ Secure checkout</span><span>✓ Easy ordering</span><span>✓ India delivery</span></div></div><div className="hero-art"><div className="fabric-card one">PORWAL</div><div className="fabric-card two">GHARANA</div><div className="hero-note"><b>1000+</b><small>styles coming soon</small></div></div></section>
+  <section className="quick-links">{[["01","Silk Sarees","Elegant & traditional"],["02","Banarasi","Classic woven styles"],["03","Festive Wear","For special occasions"],["04","Daily Wear","Comfortable favourites"]].map(([n,t,s])=><button key={t} onClick={()=>setCat(t==="Festive Wear"?"Festive":t)}><span>{n}</span><b>{t}</b><small>{s}</small><i>→</i></button>)}</section>
+  <section className="shop-section" id="products"><div className="section-head"><div><span className="eyebrow">OUR COLLECTION</span><h2>Shop sarees</h2><p>{list.length} products shown</p></div><div className="sort-wrap"><label>Sort by</label><select value={sort} onChange={e=>setSort(e.target.value)}><option value="featured">Featured</option><option value="rating">Customer rating</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select></div></div><div className="filter-row">{cats.map(c=><button key={c} className={cat===c?"selected":""} onClick={()=>setCat(c)}>{c}</button>)}</div><div className="product-grid">{list.map(p=>{const off=Math.round((1-p.price/p.mrp)*100);return <article className="product-card" key={p.code}><button className="product-image" onClick={()=>setView(p)}>{p.badge&&<span className="badge">{p.badge}</span>}<span className="image-code">{p.code}</span><div className={`saree-visual v${Number(p.code.slice(-1))%4}`}><span>{p.color}</span></div></button><div className="product-info"><button className="product-name" onClick={()=>setView(p)}>{p.name}</button><div className="rating"><b>★ {p.rating}</b><span> ({p.reviews})</span></div><div className="price-line"><strong>{money(p.price)}</strong><del>{money(p.mrp)}</del><em>{off}% off</em></div><p className="delivery">FREE delivery on 3+ items</p><button className="add-btn" onClick={()=>add(p)}>Add to Cart</button></div></article>})}</div>{!list.length&&<div className="empty"><h3>No products found</h3><p>Try another search or category.</p><button onClick={()=>{setQ("");setCat("All")}}>View all products</button></div>}</section>
+  <section className="service-bar"><div><b>🚚 Delivery across India</b><span>Safe and reliable delivery options</span></div><div><b>🔒 Secure payments</b><span>Protected online checkout</span></div><div><b>↩ Easy support</b><span>We're here when you need us</span></div></section>
+  <footer><div><strong>PORWAL GHARANA</strong><p>Your online destination for sarees and traditional wear.</p></div><div className="footer-links"><span>About</span><span>Contact</span><span>Shipping Policy</span><span>Returns</span><span>Privacy</span></div><small>© 2026 Porwal Gharana. All rights reserved.</small></footer>
+  {view&&<div className="overlay" onClick={()=>setView(null)}><div className="product-modal" onClick={e=>e.stopPropagation()}><button className="close" onClick={()=>setView(null)}>×</button><div className="modal-image"><div className={`saree-visual v${Number(view.code.slice(-1))%4}`}><span>{view.color}</span></div></div><div className="modal-copy"><span className="modal-code">PRODUCT CODE: {view.code}</span><h2>{view.name}</h2><div className="rating"><b>★ {view.rating}</b><span> {view.reviews} ratings</span></div><div className="price-line"><strong>{money(view.price)}</strong><del>{money(view.mrp)}</del><em>{Math.round((1-view.price/view.mrp)*100)}% off</em></div><p>Elegant {view.color.toLowerCase()} saree suitable for festive, family and special occasions.</p><div className="detail"><span>Colour</span><b>{view.color}</b></div><div className="detail"><span>Size</span><b>Free Size</b></div><button className="primary-btn wide" onClick={()=>add(view)}>Add to Cart</button><button className="buy-btn" onClick={()=>add(view)}>Buy Now</button></div></div></div>}
+  {cartOpen&&<div className="overlay" onClick={()=>setCartOpen(false)}><aside className="cart-panel" onClick={e=>e.stopPropagation()}><div className="cart-head"><h2>Your Cart</h2><button onClick={()=>setCartOpen(false)}>×</button></div>{!cart.length?<div className="cart-empty"><span>🛍</span><h3>Your cart is empty</h3><p>Add beautiful sarees to get started.</p><button className="primary-btn" onClick={()=>setCartOpen(false)}>Continue shopping</button></div>:<><div className="cart-items">{cart.map((p,i)=><div className="cart-item" key={`${p.code}-${i}`}><div className="mini-image"><div className={`saree-visual v${Number(p.code.slice(-1))%4}`}/></div><div><b>{p.name}</b><span>{p.color} · {p.code}</span><strong>{money(p.price)}</strong></div><button onClick={()=>setCart(c=>c.filter((_,x)=>x!==i))}>Remove</button></div>)}</div><div className="cart-summary"><div><span>Subtotal</span><b>{money(subtotal)}</b></div><div><span>Delivery</span><b>{delivery?money(delivery):"FREE"}</b></div><div className="total"><span>Total</span><b>{money(subtotal+delivery)}</b></div><button className="primary-btn wide">Proceed to Checkout</button><p>Online test payment will be connected in the next phase.</p></div></>}</aside></div>}
+ </main>
 }
