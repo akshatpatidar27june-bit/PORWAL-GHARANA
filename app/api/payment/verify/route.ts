@@ -1,0 +1,4 @@
+import {NextResponse} from "next/server";
+import crypto from "node:crypto";
+export async function POST(req:Request){
+ try{const body=await req.json();const secret=process.env.RAZORPAY_KEY_SECRET;if(!secret)return NextResponse.json({error:"Razorpay secret is not configured."},{status:500});const {razorpay_order_id,razorpay_payment_id,razorpay_signature}=body;if(!razorpay_order_id||!razorpay_payment_id||!razorpay_signature)return NextResponse.json({error:"Missing payment fields."},{status:400});const expected=crypto.createHmac("sha256",secret).update(`${razorpay_order_id}|${razorpay_payment_id}`).digest("hex");const ok=crypto.timingSafeEqual(Buffer.from(expected),Buffer.from(razorpay_signature));if(!ok)return NextResponse.json({error:"Invalid payment signature."},{status:400});return NextResponse.json({verified:true,paymentId:razorpay_payment_id,orderId:razorpay_order_id});}catch{return NextResponse.json({error:"Payment verification failed."},{status:400})}}
